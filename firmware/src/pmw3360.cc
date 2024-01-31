@@ -2,6 +2,8 @@
 
 #include <hardware/gpio.h>
 
+#include <pico/time.h>
+
 #include "pmw3360.h"
 
 #include "registers.h"
