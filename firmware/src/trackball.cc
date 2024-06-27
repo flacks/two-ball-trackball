@@ -109,6 +109,7 @@ uint8_t const desc_hid_report[] = {
     0x95, 0x08,         //       Report Count (8)
     0x75, 0x01,         //       Report Size (1)
     0x25, 0x01,         //       Logical Maximum (1)
+                        //  sensors[0].init();
     0x81, 0x02,         //       Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
     0x05, 0x01,         //       Usage Page (Generic Desktop Ctrls)
     0x09, 0x30,         //       Usage (X)
@@ -401,11 +402,11 @@ void hid_task() {
 
     // uncomment to have pressing all three buttons reset into BOOTSEL
     // (convenient during development)
-    // if (!(pin_state & (1 << button_pins[0]) ||
-    //       pin_state & (1 << button_pins[1]) ||
-    //       pin_state & (1 << button_pins[2]))) {
-    //     reset_usb_boot(0, 0);
-    // }
+    if (!(pin_state & (1 << button_pins[0]) ||
+          pin_state & (1 << button_pins[1]) ||
+          pin_state & (1 << button_pins[2]))) {
+        reset_usb_boot(0, 0);
+    }
 
     tud_hid_report(1, &report, sizeof(report));
 }
